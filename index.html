@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Advanced Live Weather Dashboard</title>
+  <title>Live Weather Dashboard</title>
   <style>
     * {
       box-sizing: border-box;
@@ -17,11 +17,11 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background: linear-gradient(-45deg, #090d16, #0f172a, #1e1b4b, #090d16);
+      background: linear-gradient(-45deg, #090d16, #1e293b, #0369a1, #0f172a);
       background-size: 400% 400%;
       animation: gradientBG 15s ease infinite;
       color: #ffffff;
-      padding: 30px 20px;
+      padding: 20px;
     }
 
     @keyframes gradientBG {
@@ -30,143 +30,125 @@
       100% { background-position: 0% 50%; }
     }
 
-    /* Bigger Container with Float Animation */
+    /* Bigger Container with Smooth Fade-in Animation */
     .container {
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(255, 255, 255, 0.06);
       backdrop-filter: blur(20px);
       border: 1px solid rgba(255, 255, 255, 0.15);
       border-radius: 24px;
       padding: 50px 40px;
-      max-width: 650px;
+      max-width: 550px;
       width: 100%;
       text-align: center;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-      animation: floatContainer 6s ease-in-out infinite;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6);
+      animation: fadeIn 1s ease-out;
     }
 
-    @keyframes floatContainer {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-8px); }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     h1 {
-      font-size: 3rem;
-      margin-bottom: 8px;
-      background: linear-gradient(90deg, #38bdf8, #818cf8);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    p.subtitle {
-      color: #94a3b8;
-      font-size: 1.1rem;
-      margin-bottom: 35px;
+      font-size: 2.8rem;
+      margin-bottom: 25px;
+      color: #38bdf8;
+      font-weight: 700;
+      letter-spacing: 1px;
     }
 
     .search-box {
       display: flex;
-      gap: 15px;
-      margin-bottom: 30px;
+      gap: 12px;
+      margin-bottom: 25px;
     }
 
     input[type="text"] {
       flex: 1;
       padding: 16px 20px;
       border-radius: 14px;
-      border: 2px solid #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.5);
       background: rgba(0, 0, 0, 0.4);
       color: white;
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       outline: none;
-      transition: 0.3s ease;
+      transition: all 0.3s ease;
     }
 
     input[type="text"]:focus {
-      box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+      border-color: #38bdf8;
+      box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
     }
 
     button {
-      padding: 16px 30px;
+      padding: 16px 25px;
       border: none;
       border-radius: 14px;
-      background: linear-gradient(135deg, #0284c7, #2563eb);
+      background: linear-gradient(135deg, #0284c7, #0369a1);
       color: white;
-      font-size: 1.1rem;
       font-weight: bold;
+      font-size: 1.1rem;
       cursor: pointer;
       transition: all 0.3s ease;
     }
 
     button:hover {
+      background: linear-gradient(135deg, #0369a1, #0284c7);
       transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
+      box-shadow: 0 5px 15px rgba(2, 132, 199, 0.4);
     }
 
-    /* Weather Card with Smooth Fade & Slide Animation */
+    /* Enhanced Weather Card */
     .weather-card {
       display: none;
-      background: rgba(255, 255, 255, 0.07);
-      border-radius: 20px;
-      padding: 35px;
+      background: rgba(0, 0, 0, 0.35);
+      border-radius: 18px;
+      padding: 35px 25px;
       margin-top: 25px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      animation: fadeInUp 0.6s ease forwards;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      animation: slideUp 0.5s ease-out;
     }
 
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .city-name {
-      font-size: 2rem;
-      margin-bottom: 5px;
+      font-size: 1.8rem;
+      margin-bottom: 12px;
       color: #38bdf8;
       font-weight: 600;
     }
 
     .temp {
-      font-size: 5rem;
-      font-weight: bold;
-      margin: 20px 0;
-      text-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      font-size: 4.5rem;
+      font-weight: 800;
+      margin: 15px 0;
+      color: #ffffff;
+      text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     }
 
     .condition {
-      font-size: 1.4rem;
-      color: #cbd5e1;
-      margin-bottom: 25px;
+      font-size: 1.3rem;
+      margin-bottom: 20px;
+      color: #e2e8f0;
     }
 
-    /* Grid for Extra Details */
-    .details-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 15px;
+    .details {
+      display: flex;
+      justify-content: space-around;
       margin-top: 25px;
-    }
-
-    .detail-box {
-      background: rgba(0, 0, 0, 0.3);
-      padding: 18px;
-      border-radius: 14px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
       font-size: 1.1rem;
       color: #cbd5e1;
     }
 
-    .detail-box span {
-      display: block;
+    .loading-msg {
+      margin: 20px 0;
+      font-size: 1.2rem;
       color: #38bdf8;
-      font-size: 1.3rem;
-      font-weight: bold;
-      margin-top: 6px;
     }
 
     .error-msg {
@@ -180,30 +162,23 @@
 <body>
 
   <div class="container">
-    <h1>🌍 Weather Hub</h1>
-    <p class="subtitle">Global live meteorological dashboard</p>
+    <h1>🌦️ Live Weather</h1>
     
     <div class="search-box">
-      <input type="text" id="cityInput" placeholder="Search city (e.g., Tokyo, New York)">
-      <button id="searchBtn">Explore</button>
+      <input type="text" id="cityInput" placeholder="Search any city...">
+      <button id="searchBtn">Search</button>
     </div>
 
-    <p class="error-msg" id="errorMsg">City not found. Please check spelling and try again.</p>
+    <div class="loading-msg" id="loadingMsg">Detecting your location...</div>
+    <p class="error-msg" id="errorMsg">Could not retrieve weather data. Please try another city.</p>
 
     <div class="weather-card" id="weatherCard">
       <div class="city-name" id="cityName">-</div>
       <div class="temp" id="tempValue">0°C</div>
       <div class="condition" id="conditionText">-</div>
       
-      <div class="details-grid">
-        <div class="detail-box">
-          Wind Speed
-          <span id="windSpeed">0 km/h</span>
-        </div>
-        <div class="detail-box">
-          Humidity
-          <span id="humidityVal">0%</span>
-        </div>
+      <div class="details">
+        <div>Wind Speed: <span id="windSpeed">0 km/h</span></div>
       </div>
     </div>
   </div>
@@ -216,63 +191,86 @@
     const tempValue = document.getElementById('tempValue');
     const conditionText = document.getElementById('conditionText');
     const windSpeed = document.getElementById('windSpeed');
-    const humidityVal = document.getElementById('humidityVal');
     const errorMsg = document.getElementById('errorMsg');
+    const loadingMsg = document.getElementById('loadingMsg');
 
-    searchBtn.addEventListener('click', getWeather);
+    searchBtn.addEventListener('click', () => getWeatherByCity(cityInput.value.trim()));
     cityInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') getWeather();
+      if (e.key === 'Enter') getWeatherByCity(cityInput.value.trim());
     });
 
-    async function getWeather() {
-      const query = cityInput.value.trim();
+    // Automatically check location on page load
+    window.addEventListener('load', () => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+            getWeatherByCoords(lat, lon, "Your Current Location");
+          },
+          () => {
+            // If user blocks location or error occurs, hide loading and let them search manually
+            loadingMsg.style.display = 'none';
+          }
+        );
+      } else {
+        loadingMsg.style.display = 'none';
+      }
+    });
+
+    async function getWeatherByCity(query) {
       if (!query) return;
 
       errorMsg.style.display = 'none';
       weatherCard.style.display = 'none';
+      loadingMsg.style.display = 'block';
+      loadingMsg.textContent = 'Searching city...';
 
       try {
-        // Step 1: Geocoding lookup
         const geoRes = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(query)}&count=1`);
         const geoData = await geoRes.json();
 
         if (!geoData.results || geoData.results.length === 0) {
+          loadingMsg.style.display = 'none';
           errorMsg.style.display = 'block';
           return;
         }
 
         const location = geoData.results[0];
-        const { latitude, longitude, name, country } = location;
+        getWeatherByCoords(location.latitude, location.longitude, `${location.name}, ${location.country || ''}`);
+      } catch (err) {
+        loadingMsg.style.display = 'none';
+        errorMsg.style.display = 'block';
+      }
+    }
 
-        // Step 2: Fetch weather data including humidity & wind
-        const weatherRes = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code`);
+    async function getWeatherByCoords(lat, lon, displayName) {
+      try {
+        const weatherRes = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`);
         const weatherData = await weatherRes.json();
 
-        const current = weatherData.current;
+        const current = weatherData.current_weather;
 
-        // Populate dashboard elements
-        cityName.textContent = `${name}, ${country || ''}`;
-        tempValue.textContent = `${Math.round(current.temperature_2m)}°C`;
-        windSpeed.textContent = `${current.wind_speed_10m} km/h`;
-        humidityVal.textContent = `${current.relative_humidity_2m}%`;
-        
-        conditionText.textContent = getWeatherDescription(current.weather_code);
+        cityName.textContent = displayName;
+        tempValue.textContent = `${current.temperature}°C`;
+        windSpeed.textContent = `${current.windspeed} km/h`;
+        conditionText.textContent = getWeatherDescription(current.weathercode);
 
+        loadingMsg.style.display = 'none';
         weatherCard.style.display = 'block';
       } catch (err) {
+        loadingMsg.style.display = 'none';
         errorMsg.style.display = 'block';
-        console.error(err);
       }
     }
 
     function getWeatherDescription(code) {
-      if (code === 0) return '☀️ Crystal Clear Sky';
-      if (code >= 1 && code <= 3) return '⛅ Partly Cloudy & Bright';
-      if (code >= 45 && code <= 48) return '🌫️ Foggy & Misty Conditions';
-      if (code >= 51 && code <= 67) return '🌧️ Steady Showers';
-      if (code >= 71 && code <= 77) return '❄️ Snowfall Active';
-      if (code >= 95) return '⚡ Severe Thunderstorms';
-      return '🌤️ Pleasant Atmosphere';
+      if (code === 0) return '☀️ Clear sky';
+      if (code >= 1 && code <= 3) return '⛅ Partly cloudy';
+      if (code >= 51 && code <= 67) return '🌧️ Rain showers';
+      if (code >= 71 && code <= 77) return '❄️ Snowfall';
+      if (code >= 95) return '⚡ Thunderstorm';
+      return '🌤️ Fair weather';
     }
   </script>
 </body>
