@@ -36,8 +36,8 @@
       backdrop-filter: blur(20px);
       border: 1px solid rgba(255, 255, 255, 0.15);
       border-radius: 24px;
-      padding: 50px 40px;
-      max-width: 550px;
+      padding: 60px 50px;
+      max-width: 700px;
       width: 100%;
       text-align: center;
       box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6);
@@ -50,24 +50,115 @@
     }
 
     h1 {
-      font-size: 2.8rem;
-      margin-bottom: 25px;
+      font-size: 3.2rem;
+      margin-bottom: 30px;
       color: #38bdf8;
       font-weight: 700;
       letter-spacing: 1px;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .header-section {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .help-icon {
+      width: 30px;
+      height: 30px;
+      background: rgba(56, 189, 248, 0.2);
+      border: 2px solid #38bdf8;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+    }
+
+    .help-icon:hover {
+      background: rgba(56, 189, 248, 0.4);
+      transform: scale(1.1);
+      box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
+    }
+
+    /* Help Box Tooltip */
+    .help-box {
+      position: relative;
+      display: none;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 25px;
+      font-size: 0.95rem;
+      color: #cbd5e1;
+      text-align: left;
+      animation: slideDown 0.4s ease-out;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    @keyframes slideDown {
+      from { 
+        opacity: 0;
+        transform: translateY(-15px);
+        max-height: 0;
+      }
+      to { 
+        opacity: 1;
+        transform: translateY(0);
+        max-height: 300px;
+      }
+    }
+
+    .help-box.show {
+      display: block;
+    }
+
+    .help-box h3 {
+      color: #38bdf8;
+      margin-bottom: 12px;
+      font-size: 1.1rem;
+    }
+
+    .help-box ul {
+      margin-left: 20px;
+      line-height: 1.8;
+    }
+
+    .help-box li {
+      margin-bottom: 8px;
+    }
+
+    .help-box strong {
+      color: #7dd3fc;
     }
 
     .search-box {
       display: flex;
       gap: 12px;
       margin-bottom: 25px;
+      flex-wrap: wrap;
+      justify-content: center;
     }
 
     input[type="text"] {
       flex: 1;
-      padding: 16px 20px;
+      min-width: 200px;
+      padding: 18px 22px;
       border-radius: 14px;
-      border: 1px solid rgba(56, 189, 248, 0.5);
+      border: 2px solid rgba(56, 189, 248, 0.5);
       background: rgba(0, 0, 0, 0.4);
       color: white;
       font-size: 1.1rem;
@@ -77,11 +168,17 @@
 
     input[type="text"]:focus {
       border-color: #38bdf8;
-      box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+      box-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+      background: rgba(0, 0, 0, 0.6);
+      transform: scale(1.02);
+    }
+
+    input[type="text"]::placeholder {
+      color: rgba(255, 255, 255, 0.5);
     }
 
     button {
-      padding: 16px 25px;
+      padding: 18px 30px;
       border: none;
       border-radius: 14px;
       background: linear-gradient(135deg, #0284c7, #0369a1);
@@ -90,12 +187,58 @@
       font-size: 1.1rem;
       cursor: pointer;
       transition: all 0.3s ease;
+      white-space: nowrap;
     }
 
     button:hover {
       background: linear-gradient(135deg, #0369a1, #0284c7);
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(2, 132, 199, 0.4);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(2, 132, 199, 0.5);
+    }
+
+    button:active {
+      transform: translateY(-1px);
+    }
+
+    /* Cities Suggestion Box */
+    .cities-section {
+      margin-top: 25px;
+      padding-top: 25px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .cities-label {
+      font-size: 0.95rem;
+      color: #94a3b8;
+      margin-bottom: 15px;
+      display: block;
+    }
+
+    .cities-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 10px;
+      justify-items: center;
+    }
+
+    .city-btn {
+      padding: 12px 20px;
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      border-radius: 10px;
+      background: rgba(56, 189, 248, 0.1);
+      color: #7dd3fc;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 100%;
+      max-width: 150px;
+    }
+
+    .city-btn:hover {
+      background: rgba(56, 189, 248, 0.25);
+      border-color: #38bdf8;
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(56, 189, 248, 0.2);
     }
 
     /* Enhanced Weather Card */
@@ -103,8 +246,8 @@
       display: none;
       background: rgba(0, 0, 0, 0.35);
       border-radius: 18px;
-      padding: 35px 25px;
-      margin-top: 25px;
+      padding: 45px 35px;
+      margin-top: 30px;
       border: 1px solid rgba(255, 255, 255, 0.1);
       animation: slideUp 0.5s ease-out;
     }
@@ -115,40 +258,65 @@
     }
 
     .city-name {
-      font-size: 1.8rem;
-      margin-bottom: 12px;
+      font-size: 2.2rem;
+      margin-bottom: 15px;
       color: #38bdf8;
       font-weight: 600;
+      animation: slideInLeft 0.6s ease-out;
+    }
+
+    @keyframes slideInLeft {
+      from { opacity: 0; transform: translateX(-20px); }
+      to { opacity: 1; transform: translateX(0); }
     }
 
     .temp {
-      font-size: 4.5rem;
+      font-size: 5.2rem;
       font-weight: 800;
-      margin: 15px 0;
+      margin: 20px 0;
       color: #ffffff;
       text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      animation: slideInRight 0.6s ease-out;
+    }
+
+    @keyframes slideInRight {
+      from { opacity: 0; transform: translateX(20px); }
+      to { opacity: 1; transform: translateX(0); }
     }
 
     .condition {
-      font-size: 1.3rem;
-      margin-bottom: 20px;
+      font-size: 1.5rem;
+      margin-bottom: 25px;
       color: #e2e8f0;
+      animation: fadeIn 0.8s ease-out 0.3s both;
     }
 
     .details {
       display: flex;
       justify-content: space-around;
-      margin-top: 25px;
-      padding-top: 20px;
+      margin-top: 30px;
+      padding-top: 25px;
       border-top: 1px solid rgba(255, 255, 255, 0.1);
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       color: #cbd5e1;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .details div {
+      animation: fadeIn 0.8s ease-out 0.4s both;
     }
 
     .loading-msg {
       margin: 20px 0;
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       color: #38bdf8;
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
     }
 
     .error-msg {
@@ -156,17 +324,81 @@
       margin-top: 15px;
       font-size: 1.1rem;
       display: none;
+      animation: shake 0.5s ease-out;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      75% { transform: translateX(5px); }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 600px) {
+      .container {
+        padding: 40px 30px;
+        max-width: 100%;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+      }
+
+      .temp {
+        font-size: 4rem;
+      }
+
+      input[type="text"] {
+        min-width: 150px;
+        padding: 15px 18px;
+        font-size: 1rem;
+      }
+
+      button {
+        padding: 15px 25px;
+        font-size: 1rem;
+      }
+
+      .details {
+        flex-direction: column;
+        font-size: 1rem;
+      }
     }
   </style>
 </head>
 <body>
 
   <div class="container">
-    <h1>🌦️ Live Weather</h1>
+    <div class="header-section">
+      <h1>🌦️ Live Weather</h1>
+      <div class="help-icon" id="helpIcon" title="Click for help">?</div>
+    </div>
+
+    <div class="help-box" id="helpBox">
+      <h3>📍 How to Use:</h3>
+      <ul>
+        <li><strong>Search Manually:</strong> Enter any city name and click "Search" or press Enter</li>
+        <li><strong>Quick Selection:</strong> Click any city button below for instant weather</li>
+        <li><strong>Current Location:</strong> Allow location access for your local weather on page load</li>
+        <li><strong>Weather Info:</strong> View temperature, weather condition, and wind speed</li>
+      </ul>
+    </div>
     
     <div class="search-box">
       <input type="text" id="cityInput" placeholder="Search any city...">
       <button id="searchBtn">Search</button>
+    </div>
+
+    <div class="cities-section">
+      <span class="cities-label">📌 Quick City Selection:</span>
+      <div class="cities-list">
+        <button class="city-btn" onclick="getWeatherByCity('London')">🇬🇧 London</button>
+        <button class="city-btn" onclick="getWeatherByCity('New York')">🇺🇸 New York</button>
+        <button class="city-btn" onclick="getWeatherByCity('Tokyo')">🇯🇵 Tokyo</button>
+        <button class="city-btn" onclick="getWeatherByCity('Paris')">🇫🇷 Paris</button>
+        <button class="city-btn" onclick="getWeatherByCity('Sydney')">🇦🇺 Sydney</button>
+        <button class="city-btn" onclick="getWeatherByCity('Dubai')">🇦🇪 Dubai</button>
+      </div>
     </div>
 
     <div class="loading-msg" id="loadingMsg">Detecting your location...</div>
@@ -193,6 +425,20 @@
     const windSpeed = document.getElementById('windSpeed');
     const errorMsg = document.getElementById('errorMsg');
     const loadingMsg = document.getElementById('loadingMsg');
+    const helpIcon = document.getElementById('helpIcon');
+    const helpBox = document.getElementById('helpBox');
+
+    // Help box toggle
+    helpIcon.addEventListener('click', () => {
+      helpBox.classList.toggle('show');
+    });
+
+    // Close help box when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!helpIcon.contains(e.target) && !helpBox.contains(e.target)) {
+        helpBox.classList.remove('show');
+      }
+    });
 
     searchBtn.addEventListener('click', () => getWeatherByCity(cityInput.value.trim()));
     cityInput.addEventListener('keypress', (e) => {
@@ -224,7 +470,7 @@
       errorMsg.style.display = 'none';
       weatherCard.style.display = 'none';
       loadingMsg.style.display = 'block';
-      loadingMsg.textContent = 'Searching city...';
+      loadingMsg.textContent = `🔍 Searching for ${query}...`;
 
       try {
         const geoRes = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(query)}&count=1`);
@@ -233,6 +479,7 @@
         if (!geoData.results || geoData.results.length === 0) {
           loadingMsg.style.display = 'none';
           errorMsg.style.display = 'block';
+          cityInput.value = '';
           return;
         }
 
@@ -258,6 +505,7 @@
 
         loadingMsg.style.display = 'none';
         weatherCard.style.display = 'block';
+        cityInput.value = '';
       } catch (err) {
         loadingMsg.style.display = 'none';
         errorMsg.style.display = 'block';
